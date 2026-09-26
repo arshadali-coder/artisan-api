@@ -1,0 +1,19 @@
+
+services:
+  artisan-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: artisan_market_app
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_NAME=Artisan Market App API
+      - DEBUG=True
+      - DATABASE_URL=sqlite:///./artisans.db
+      - SECRET_KEY=super-secret-key-change-this-in-production-artisans-sih-2026
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./static/uploads:/app/static/uploads
+      - ./artisans.db:/app/artisans.db
+    restart: unless-stopped
